@@ -135,6 +135,7 @@
             _.shouldClick = true;
             _.$slider = $(element);
             _.$slidesCache = null;
+            _.$slidesOriginal = null;
             _.transformType = null;
             _.transitionType = null;
             _.visibilityChange = 'visibilitychange';
@@ -986,6 +987,10 @@
         if (filter !== null) {
 
             _.$slidesCache = _.$slides;
+
+            if (_.$slidesOriginal == null) {
+                _.$slidesOriginal = _.$slides;
+            }
 
             _.unload();
 
@@ -2793,13 +2798,13 @@
 
         var _ = this;
 
-        if (_.$slidesCache !== null) {
+        if (_.$slidesOriginal !== null) {
 
             _.unload();
 
             _.$slideTrack.children(this.options.slide).detach();
 
-            _.$slidesCache.appendTo(_.$slideTrack);
+            _.$slidesOriginal.appendTo(_.$slideTrack);
 
             _.reinit();
 
